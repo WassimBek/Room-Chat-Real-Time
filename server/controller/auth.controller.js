@@ -1,6 +1,6 @@
 const createToken = require("../utils/generateToken");
 const { hashPassword, comparePassword } = require("../utils/hashingPassword");
-
+const sendMailer = require("../utils/sendVerificationEmail");
 module.exports.register = async(req , res) => {
     const prisma = req.prisma ;
     const {username , name , email , password , profile_picture} = req.body ;
@@ -15,6 +15,7 @@ module.exports.register = async(req , res) => {
                 profile_picture : profile_picture ,
             },
         })
+        sendMailer(email , user.id , prisma)
         const token = await createToken(user.id) ;
         return res.status(201).json({
             status : true ,
