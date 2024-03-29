@@ -38,7 +38,7 @@ model message {
   message    String
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
-  user       user      @relation(fields: [user_id], references: [id])
+  user       user      @relation(fields: [user_id], references: [id] , onDelete: Cascade)
   user_id    String
 }
 
@@ -48,7 +48,7 @@ model otp {
   verify_code Boolean  @default(false)
   created_at  DateTime @default(now())
   expired_at  DateTime
-  user        user     @relation(fields: [user_id], references: [id])
+  user        user     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id     String   @unique
 }
 
@@ -64,6 +64,6 @@ model file {
 model room_code {
   id      String @id @default(uuid())
   code    Int
-  room    room   @relation(fields: [room_id], references: [id])
+  room    room   @relation(fields: [room_id], references: [id] , onDelete: Cascade)
   room_id String @unique
 }
