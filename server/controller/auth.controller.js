@@ -9,7 +9,7 @@ module.exports.register = async(req , res) => {
             name : name,
             username : username,
             password : password,
-            profile_picture : profile_picture
+            profile_picture : profile_picture ,
         })
         const token = await createToken(user.id) ;
         return res.status(201).json({
