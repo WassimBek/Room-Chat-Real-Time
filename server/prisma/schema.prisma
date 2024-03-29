@@ -23,7 +23,7 @@ model user {
   message        message[]
   room           room[]
   profile_url_id file?     @relation(fields: [file_id], references: [id])
-  file_id        String    @unique
+  file_id        String?   @unique
 }
 
 model room {
@@ -44,7 +44,7 @@ model message {
 
 model otp {
   id          String   @id @default(uuid())
-  otp_code    Int 
+  otp_code    Int
   verify_code Boolean  @default(false)
   created_at  DateTime @default(now())
   expired_at  DateTime
@@ -64,6 +64,6 @@ model file {
 model room_code {
   id      String @id @default(uuid())
   code    Int
-  room    room  @relation(fields: [room_id], references: [id])
+  room    room   @relation(fields: [room_id], references: [id])
   room_id String @unique
 }

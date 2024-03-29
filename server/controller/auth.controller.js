@@ -1,15 +1,19 @@
 const createToken = require("../utils/generateToken");
+const { hashPassword, comparePassword } = require("../utils/hashingPassword");
 
 module.exports.register = async(req , res) => {
     const prisma = req.prisma ;
     const {username , name , email , password , profile_picture} = req.body ;
     try {
+        const pass = await hashPassword(password) ;
         const user = await prisma.user.create({
-            email : email,
-            name : name,
-            username : username,
-            password : password,
-            profile_picture : profile_picture ,
+            data : {
+                username : username,
+                name : name,
+                email : email,
+                password : pass,
+                profile_picture : profile_picture ,
+            },
         })
         const token = await createToken(user.id) ;
         return res.status(201).json({
@@ -33,7 +37,7 @@ module.exports.login = async(req , res) => {
     try {
         const user = await prisma.user.findUnique({
             where : {
-                email : email
+                email : email , 
             }
         })
         if (!user) {
@@ -42,11 +46,20 @@ module.exports.login = async(req , res) => {
                 message : 'user not found' ,
             })
         }
-        const token = await createToken(user.id) ;
-        return res.status(200).json({
-            status : true ,
-            message : 'user login successfully' ,
-            token : token
+        const verifyPassword = comparePassword(user.password , password) ;
+        if (verifyPassword) {
+            const token = await createToken(user.id) ;
+            return res.status(200).json({
+                status : true ,
+                message : 'user login successfully' ,
+                token : token 
+            })   
+        }
+        return res.status(401).json({
+            status : false ,
+            message : {
+                password : "incorrect password" ,
+            } ,
         })
     } catch (error) {
         console.error(error) ;
