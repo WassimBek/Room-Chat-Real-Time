@@ -9,4 +9,6 @@ router
 
 router
     .route("/login")
-    .get()
+    .get(authController.login) ;
+
+module.exports = router ;

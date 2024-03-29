@@ -26,3 +26,34 @@ module.exports.register = async(req , res) => {
         })
     }
 }
+
+module.exports.login = async(req , res) => {
+    const prisma = req.prisma ;
+    const {email , password} = req.body ;
+    try {
+        const user = await prisma.user.findUnique({
+            where : {
+                email : email
+            }
+        })
+        if (!user) {
+            return res.status(400).json({
+                status : false ,
+                message : 'user not found' ,
+            })
+        }
+        const token = await createToken(user.id) ;
+        return res.status(200).json({
+            status : true ,
+            message : 'user login successfully' ,
+            token : token
+        })
+    } catch (error) {
+        console.error(error) ;
+        return res.status(500).json({
+            status : false ,
+            message : 'user login failed' ,
+            error : error.message
+        })
+    }
+}
