@@ -9,6 +9,42 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model user {
+  id       String @id @default(uuid())
+  username String @unique
+  nema     String
+  email    String @unique
+  password String
+}
+
+model room {
+  id    String @id @default(uuid())
+  title String
+}
+
+model message {
+  id      String @id @default(uuid())
+  message String
+  created_at DateTime @default(now())
+  updated_at DateTime? @updatedAt
+}
+
+model otp {
+  id String @id @default(uuid())
+  otp_code Int
+  verify_code Boolean
+  created_at DateTime @default(now())
+  expired_at DateTime 
+}
+
+model file {
+  id String @id @default(uuid())
+  url String?
+  is_deleted Boolean
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
