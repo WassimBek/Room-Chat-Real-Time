@@ -14,37 +14,56 @@ datasource db {
 }
 
 model user {
-  id       String @id @default(uuid())
-  username String @unique
-  nema     String
-  email    String @unique
-  password String
+  id             String    @id @default(uuid())
+  username       String    @unique
+  name           String
+  email          String    @unique
+  password       String
+  otp            otp?
+  message        message[]
+  room           room[]
+  profile_url_id file?     @relation(fields: [file_id], references: [id])
+  file_id        String    @unique
 }
 
 model room {
-  id    String @id @default(uuid())
-  title String
+  id        String     @id @default(uuid())
+  title     String
+  user      user[]
+  room_code room_code?
 }
 
 model message {
-  id      String @id @default(uuid())
-  message String
-  created_at DateTime @default(now())
+  id         String    @id @default(uuid())
+  message    String
+  created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
+  user       user      @relation(fields: [user_id], references: [id])
+  user_id    String
 }
 
 model otp {
-  id String @id @default(uuid())
-  otp_code Int
-  verify_code Boolean
-  created_at DateTime @default(now())
-  expired_at DateTime 
+  id          String   @id @default(uuid())
+  otp_code    Int 
+  verify_code Boolean  @default(false)
+  created_at  DateTime @default(now())
+  expired_at  DateTime
+  user        user     @relation(fields: [user_id], references: [id])
+  user_id     String   @unique
 }
 
 model file {
-  id String @id @default(uuid())
-  url String?
-  is_deleted Boolean
+  id         String   @id @default(uuid())
+  url        String?
+  is_deleted Boolean  @default(false)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  user       user?
+}
+
+model room_code {
+  id      String @id @default(uuid())
+  code    Int
+  room    room  @relation(fields: [room_id], references: [id])
+  room_id String @unique
 }
