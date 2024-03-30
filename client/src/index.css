@@ -7,3 +7,7 @@
     padding : 0px ;
     box-sizing: border-box;
   }
+
+.registre {
+  @apply bg-transparent text-white font-semibold px-4 py-3 border-[1px] border-primary-green  rounded-xl  hover:bg-primary-green hover:text-primary-blue transition-all duration-500 ease-out ;
+}
