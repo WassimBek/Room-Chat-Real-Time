@@ -12,21 +12,37 @@ export default function Register() {
         <Form>
             <FormControl isRequired>
                 <FormLabel>name : </FormLabel>
-                <Input  border="2px solid #12182B" type="text" name="name" placeholder="Enter Name"/>
+                <Input  
+                 borderRadius="1rem"
+                 paddingX="18px" 
+                 paddingY="18px"
+                border="1px solid #12182B" type="text" name="name" placeholder="Enter Name"/>
             </FormControl>
             <FormControl isRequired>
                 <FormLabel>username  : </FormLabel>
-                <Input border="2px solid #12182B" type="text" name="username" placeholder="Enter Username"/>
+                <Input 
+                 borderRadius="1rem"
+                 paddingX="18px" 
+                 paddingY="18px"
+                border="1px solid #12182B" type="text" name="username" placeholder="Enter Username"/>
             </FormControl>
             <FormControl isRequired>
                 <FormLabel>email  : </FormLabel>
-                <Input border="2px solid #12182B" type="email" name="email" placeholder="Enter Email"/>
+                <Input 
+                 borderRadius="1rem"
+                 paddingX="18px" 
+                 paddingY="18px"
+                border="1px solid #12182B"
+                type="email" name="email" placeholder="Enter Email"/>
             </FormControl>
             <FormControl isRequired>
                 <FormLabel>password  : </FormLabel>
                 <InputGroup size='md'>
                     <Input
-                    border="2px solid black"
+                    borderRadius="1rem"
+                    paddingX="18px" 
+                    paddingY="18px"
+                    border="1px solid black"
                     pr='4.5rem'
                     type={show ? 'text' : 'password'}
                     placeholder='Enter password'
