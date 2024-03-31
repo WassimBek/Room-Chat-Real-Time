@@ -53,10 +53,9 @@ module.exports.login = async(req , res) => {
                 } ,
             })
         }
-        console.log(user.password)
-        const verifyPassword =await comparePassword(user.password , password) ;
-        console.log(verifyPassword)
-        if (verifyPassword === true) {
+        const verifyPassword = comparePassword(user.password , password) ;
+        
+        if (verifyPassword) {
             const token = await createToken(user.id) ;
             return res.status(200).json({
                 status : true ,
@@ -65,12 +64,12 @@ module.exports.login = async(req , res) => {
                 user : user ,
             })   
         }
-        else {return res.status(401).json({
+        return res.status(401).json({
             status : false ,
             message : {
                 password : "incorrect password" ,
             } ,
-        })}
+        })
     } catch (error) {
         console.error(error) ;
         return res.status(500).json({
