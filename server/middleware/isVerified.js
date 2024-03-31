@@ -8,7 +8,6 @@ module.exports.isVerified = async(req , res , next) => {
             otp : true ,
         }
     })
-    console.log(findOtp)
     if (findOtp.otp.verify_code === false) {
         req.otp = findOtp.otp ;
         next() ;

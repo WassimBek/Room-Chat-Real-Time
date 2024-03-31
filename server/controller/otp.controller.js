@@ -11,7 +11,6 @@ module.exports.otpVerification = async(req , res) => {
                     verify_code : true ,
                 }
             })
-            console.log(updateUserVerification) ;
             return res.status(200).json({
                 status : true ,
                 message : 'otp verified successfully' 
