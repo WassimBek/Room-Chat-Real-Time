@@ -30,7 +30,7 @@ model room {
   id        String     @id @default(uuid())
   title     String
   user      user[]
-  room_code room_code?
+  room_code Int?
 }
 
 model message {
@@ -59,11 +59,4 @@ model file {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   user       user?
-}
-
-model room_code {
-  id      String @id @default(uuid())
-  code    Int
-  room    room   @relation(fields: [room_id], references: [id] , onDelete: Cascade)
-  room_id String @unique
 }

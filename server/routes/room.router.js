@@ -1,9 +1,11 @@
-const {Router} = require("express")
+const {Router} = require("express");
+const roomController = require("../controller/room.controller");
+const checkAuth = require("../middleware/checkAuth.middleware")
 const router = Router() ;
 
 router
     .route("/create")
-    .post()
+    .post( checkAuth , roomController.createRoom)
 
 router
     .route("/delete")
@@ -16,3 +18,5 @@ router
 router
     .route("/leave/:id_room")
     .delete()
+
+module.exports = router ;

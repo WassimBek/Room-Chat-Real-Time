@@ -21,6 +21,9 @@ module.exports = async(user_id , prisma) => {
         })
         return otp ;
     } catch (error) {
-        throw new Error(error.message) ;
+        return res.status(404).json({
+            status : false ,
+            message : error.message
+        }) ;
     }    
 }

@@ -2,7 +2,8 @@ const express = require("express") ;
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient() ;
 const app = express() ;
-const authRouter = require("./routes/auth.router")
+const authRouter = require("./routes/auth.router") ;
+const roomRouter = require("./routes/room.router") ;
 const handelExpiredOtp = require("./middleware/removeExpiredOtp");
 const morgan = require("morgan") ;
 app.use(express.json()) ;
@@ -22,4 +23,5 @@ app.use(handelExpiredOtp) ;
 // })
 
 app.use("/auth" , authRouter) ;
+app.use("/room" , roomRouter) ;
 module.exports = app ;
