@@ -13,14 +13,15 @@ module.exports.register = async(req , res) => {
                 email : email,
                 password : pass,
                 profile_picture : profile_picture ,
-            },
+            }
         })
         sendMailer(email , user.id , prisma)
         const token = await createToken(user.id) ;
         return res.status(201).json({
             status : true ,
             message : 'user creation successfully' ,
-            token : token
+            token : token ,
+            user : user ,
         })
     } catch (error) {
         console.error(error) ;
@@ -39,29 +40,37 @@ module.exports.login = async(req , res) => {
         const user = await prisma.user.findUnique({
             where : {
                 email : email , 
+            } ,
+            include : {
+                otp : true ,
             }
         })
         if (!user) {
             return res.status(400).json({
                 status : false ,
-                message : 'user not found' ,
+                message : {
+                    email : "that's email not registered yet"
+                } ,
             })
         }
-        const verifyPassword = comparePassword(user.password , password) ;
-        if (verifyPassword) {
+        console.log(user.password)
+        const verifyPassword =await comparePassword(user.password , password) ;
+        console.log(verifyPassword)
+        if (verifyPassword === true) {
             const token = await createToken(user.id) ;
             return res.status(200).json({
                 status : true ,
                 message : 'user login successfully' ,
-                token : token 
+                token : token ,
+                user : user ,
             })   
         }
-        return res.status(401).json({
+        else {return res.status(401).json({
             status : false ,
             message : {
                 password : "incorrect password" ,
             } ,
-        })
+        })}
     } catch (error) {
         console.error(error) ;
         return res.status(500).json({

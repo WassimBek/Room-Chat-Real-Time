@@ -1,5 +1,5 @@
 import { Form } from "react-router-dom";
-import {Button, FormControl, FormLabel, Icon, IconButton, Input , InputGroup , InputRightElement, ListIcon} from "@chakra-ui/react"
+import {Button, FormControl, FormLabel, IconButton, Input , InputGroup , InputRightElement,} from "@chakra-ui/react"
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 export default function Register() {
@@ -49,10 +49,6 @@ export default function Register() {
                     />
                     <InputRightElement width='4.5rem' >
                         <IconButton bgColor="transparent" variant="ghost" size='xs' as={show ? ViewIcon : ViewOffIcon} onClick={handleClick}/>
-                        {/* <ListIcon as={show ? ViewIcon : ViewOffIcon}/> */}
-                        {/* <Button h='1.75rem' size='sm' onClick={handleClick}>
-                            {show ? 'Hide' : 'Show'}
-                        </Button> */}
                     </InputRightElement>
                 </InputGroup>
             </FormControl>
