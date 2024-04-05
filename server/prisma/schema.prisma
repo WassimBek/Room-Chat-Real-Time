@@ -27,10 +27,11 @@ model user {
 }
 
 model room {
-  id        String     @id @default(uuid())
-  title     String
-  user      user[]
-  room_code Int?
+  id          String    @id @default(uuid())
+  title       String
+  user        user[]
+  room_code   room_code @relation(fields: [room_codeId], references: [id])
+  room_codeId String    @unique
 }
 
 model message {
@@ -38,7 +39,7 @@ model message {
   message    String
   created_at DateTime  @default(now())
   updated_at DateTime? @updatedAt
-  user       user      @relation(fields: [user_id], references: [id] , onDelete: Cascade)
+  user       user      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    String
 }
 
@@ -59,4 +60,10 @@ model file {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   user       user?
+}
+
+model room_code {
+  id   String @id @default(uuid())
+  code Int
+  room room?
 }
