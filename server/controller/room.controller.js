@@ -56,14 +56,12 @@ module.exports.removeRoom = async(req , res) => {
                 room_code : true ,
             }
         })
-        console.log(room) ;
         return res.status(200).json({
             status : true ,
             message : "Room deleted successfully",
             room : room,
         })
     } catch (error) {
-        console.log(error.message) ;
         return res.status(500).json({
             status : false ,
             message : "Room deletion failed",
@@ -85,16 +83,18 @@ module.exports.joinRoom = async(req , res) => {
                         id : req.user.id
                     }
                 }
+            },
+            include : {
+                user : true ,
+                room_code : true ,
             }
         })
-        console.log(room) ;
         return res.status(200).json({
             status : true ,
             message : "Room joined successfully",
             room : room,
         })
     } catch (error) {
-        console.log(error.message) ;
         return res.status(500).json({
             status : false ,
             message : "Room joining failed",

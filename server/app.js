@@ -14,6 +14,16 @@ app.use( (req , res , next) => {
 })
 
 // app.use(handelExpiredOtp) ;
+// app.use( async (req , res , next) => {
+//     // delete all user 
+//     await  prisma.user.deleteMany() ;
+//     await prisma.otp.deleteMany() ;
+//     await prisma.room.deleteMany() ;
+//     await prisma.room_code.deleteMany() ;
+//     return res.json({
+//         message : 'delete done'
+//     })
+// })
 
 app.use("/auth" , authRouter) ;
 app.use("/room" , roomRouter) ;

@@ -64,6 +64,8 @@ model file {
 
 model room_code {
   id   String @id @default(uuid())
-  code Int
+  code Int    @unique
   room room?
+
+  @@index([code])
 }
