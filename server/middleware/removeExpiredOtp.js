@@ -6,7 +6,8 @@ module.exports = async(req , res , next) => {
         where : {
             expired_at : {
                 lte : date_now
-            }
+            },
+            verify_code : false ,
         }
     }) ;
     next() ;

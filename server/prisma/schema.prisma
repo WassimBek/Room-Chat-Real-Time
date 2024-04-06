@@ -30,7 +30,7 @@ model room {
   id          String    @id @default(uuid())
   title       String
   user        user[]
-  room_code   room_code @relation(fields: [room_codeId], references: [id])
+  room_code   room_code @relation(fields: [room_codeId], references: [id] , onDelete: Cascade)
   room_codeId String    @unique
 }
 

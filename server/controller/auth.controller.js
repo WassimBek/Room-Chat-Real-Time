@@ -3,7 +3,7 @@ const { hashPassword, comparePassword } = require("../utils/hashingPassword");
 const sendMailer = require("../utils/sendVerificationEmail");
 module.exports.register = async(req , res) => {
     const prisma = req.prisma ;
-    const {username , name , email , password , profile_picture} = req.body ;
+    const {username , name , email , password } = req.body ;
     try {
         const pass = await hashPassword(password) ;
         const user = await prisma.user.create({
@@ -12,7 +12,9 @@ module.exports.register = async(req , res) => {
                 name : name,
                 email : email,
                 password : pass,
-                profile_picture : profile_picture ,
+            },
+            include : {
+                room : true ,
             }
         })
         sendMailer(email , user.id , prisma)
@@ -41,7 +43,7 @@ module.exports.login = async(req , res) => {
                 email : email , 
             } ,
             include : {
-                otp : true ,
+                room : true ,
             }
         })
         if (!user) {
@@ -60,6 +62,7 @@ module.exports.login = async(req , res) => {
                 status : true ,
                 message : 'user login successfully' ,
                 token : token ,
+                user : user ,
             })   
         }
         return res.status(401).json({
