@@ -102,3 +102,36 @@ module.exports.joinRoom = async(req , res) => {
         })
     }
 }
+
+module.exports.leaveRoom = async(req , res) => {
+    const prisma = req.prisma ;
+    try {
+        const room = await prisma.room.update({
+            where : {
+                id : req.params.id_room ,
+            },
+            data : {
+                user : {
+                    disconnect : {
+                        id : req.user.id
+                    }
+                }
+            },
+            include : {
+                user : true ,
+                room_code : true ,
+            }
+        })
+        return res.status(200).json({
+            status : true ,
+            message : "Room left successfully",
+            room : room,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status : false ,
+            message : "Room leaving failed",
+            error : error.message,
+        })
+    }
+}

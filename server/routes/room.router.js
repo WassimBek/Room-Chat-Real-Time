@@ -18,6 +18,6 @@ router
 
 router
     .route("/leave/:id_room")
-    .delete()
+    .delete(checkAuth , roomController.leaveRoom) ;
 
 module.exports = router ;
