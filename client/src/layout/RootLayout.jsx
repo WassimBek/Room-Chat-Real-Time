@@ -10,9 +10,7 @@ export default function RootLayout() {
                 <NavLink to="/login" className="registre">Login</NavLink>
             </div>
         </nav>
-        <main className="w-full sm:h-[87vh] ">
             <Outlet />
-        </main>
     </div>
   )
 }
