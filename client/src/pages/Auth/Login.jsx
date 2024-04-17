@@ -1,22 +1,24 @@
-import {Form} from 'react-router-dom'
+import {Form, redirect, useActionData} from 'react-router-dom'
 import {FormControl , FormLabel , Input , InputGroup , InputRightElement , IconButton , Button} from '@chakra-ui/react'
 import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
 import {useState} from 'react'
+import axios from 'axios'
 export default function Login() {
     const [show , setShow] =useState(false)
-
     const handleClick = () => setShow(!show)
+    const error = useActionData() ;
   return (
     <div className="sm:w-[500px] w-[80%] mx-auto pt-10 mt-16">
     <h2 className="font-bold text-2xl text-center">Login</h2>
     <Form>
         <FormControl isRequired marginY={2}>
-            <FormLabel>username  : </FormLabel>
+            <FormLabel>email adress  : </FormLabel>
             <Input 
              borderRadius="1rem"
              paddingX="18px" 
              paddingY="18px"
-            border="1px solid #12182B" type="text" name="username" placeholder="Enter Username"/>
+            border="1px solid #12182B" type="text" name="email" placeholder="Enter Username"/>
+            {error && error.message.email && <p className="text-red-500">{error.message.email}</p>}
         </FormControl>
         <FormControl isRequired>
             <FormLabel>password  : </FormLabel>
@@ -29,7 +31,9 @@ export default function Login() {
                 pr='4.5rem'
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'
+                name='password'
                 />
+                {error && error.message.password && <p className="text-red-500">{error.message.password}</p>}
                 <InputRightElement width='4.5rem' >
                     <IconButton bgColor="transparent" variant="ghost" size='xs' as={show ? ViewIcon : ViewOffIcon} onClick={handleClick}/>
                 </InputRightElement>
@@ -41,4 +45,22 @@ export default function Login() {
     </Form>
 </div>
   )
+}
+
+export const SubmitLogin = async({request}) => {
+    const data = await request.formData() ;
+    const body = {
+        email : data.get('email') ,
+        password : data.get('password') ,
+    }
+    try {
+        const url = "http://localhost:8080/auth/login" ;
+        const resposne = await axios.get(url , body) ;
+        console.log("not wo") ;
+        console.log("data : " + resposne.data) ;
+        return redirect("/") ;
+    } catch (error) {
+        console.error("err:  "+ error.response.data) ;
+        return error.response.data ;
+    }
 }

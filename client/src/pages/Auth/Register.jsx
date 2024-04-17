@@ -18,7 +18,6 @@ export default function Register() {
                  paddingX="18px" 
                  paddingY="18px"
                 border="1px solid #12182B" type="text" name="name" placeholder="Enter Name"/>
-                {error && error.name && <p className="text-red-500">{error.name}</p>}
             </FormControl>
             <FormControl isRequired marginY={2}>
                 <FormLabel>username  : </FormLabel>
@@ -85,7 +84,6 @@ export const SubmitRegister = async({request}) => {
         return redirect("/login") ;
     } catch (error) {
         console.error("err:  "+ error.response.data) ;
-        // console.dir(error.response);
         return error.response.data ;
     }
 }
