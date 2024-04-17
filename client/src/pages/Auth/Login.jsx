@@ -3,6 +3,8 @@ import {FormControl , FormLabel , Input , InputGroup , InputRightElement , IconB
 import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
 import {useState} from 'react'
 import axios from 'axios'
+import { useDispatch} from 'react-redux'
+import {login} from '../../redux/slice/userSlice'
 export default function Login() {
     const [show , setShow] =useState(false)
     const handleClick = () => setShow(!show)
@@ -48,6 +50,7 @@ export default function Login() {
 }
 
 export const SubmitLogin = async({request}) => {
+    const dispatch = useDispatch() ;
     const data = await request.formData() ;
     const body = {
         email : data.get('email') ,
@@ -55,9 +58,8 @@ export const SubmitLogin = async({request}) => {
     }
     try {
         const url = "http://localhost:8080/auth/login" ;
-        const resposne = await axios.get(url , body) ;
-        console.log("not wo") ;
-        console.log("data : " + resposne.data) ;
+        const response = await axios.get(url , body) ;
+        dispatch(login({username : response.data.user.username , email : body.email , id : response.data.user.id}))
         return redirect("/") ;
     } catch (error) {
         console.error("err:  "+ error.response.data) ;
