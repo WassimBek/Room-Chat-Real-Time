@@ -1,4 +1,4 @@
-import { Form, useActionData } from "react-router-dom";
+import { Form, redirect, useActionData } from "react-router-dom";
 import {Button, FormControl, FormLabel, IconButton, Input , InputGroup , InputRightElement,} from "@chakra-ui/react"
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -39,7 +39,7 @@ export default function Register() {
                 name="email" 
                 placeholder="Enter Email"
                 />
-                {error && error.email && <p className="text-red-500">{error.email}</p>}
+                {error && error.message.email && <p className="text-red-500">{error.message.email}</p>}
             </FormControl>
             <FormControl isRequired>
                 <FormLabel>password  : </FormLabel>
@@ -58,7 +58,7 @@ export default function Register() {
                         <IconButton bgColor="transparent" variant="ghost" size='xs' as={show ? ViewIcon : ViewOffIcon} onClick={handleClick}/>
                     </InputRightElement>
                 </InputGroup>
-                {error && error.password && <p className="text-red-500">{error.password}</p>}
+                {error && error.message.password && <p className="text-red-500">{error.message.password}</p>}
             </FormControl>
             <div className="text-center">
             <Button  type="submit" bgColor="transparent" border="2px solid #12182B" _hover={{bgColor : '#12182B' , color : "white"}} className="mt-4">Registre</Button>
@@ -78,13 +78,13 @@ export const SubmitRegister = async({request}) => {
         username : data.get('username') ,
     }
     try {
-        console.log(body) ;
         const url = "http://localhost:8080/auth/register" ;
         const resposne = await axios.post(url , body) ;
+        console.log("not wo") ;
         console.log("data : " + resposne.data) ;
-        return resposne.data ;
+        return redirect("/login") ;
     } catch (error) {
-        console.error("err:  "+error.response) ;
+        console.error("err:  "+ error.response.data) ;
         // console.dir(error.response);
         return error.response.data ;
     }
