@@ -135,3 +135,28 @@ module.exports.leaveRoom = async(req , res) => {
         })
     }
 }
+
+module.exports.getRooms = async(req , res) => {
+    const prisma = req.prisma ;
+    try {
+        const room = await prisma.user.find({
+            where : {
+                id : req.params.id_user ,
+            },
+            include : {
+                room : true ,
+            }
+        })
+        return res.status(200).json({
+            status : true ,
+            message : "Room retrieved successfully",
+            room : room,
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status : false ,
+            message : "Room retrieval failed",
+            error : error.message,
+        })
+    }
+}
