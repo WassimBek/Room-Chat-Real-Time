@@ -30,5 +30,5 @@ app.use( (req , res , next) => {
 // })
 
 app.use("/auth" , authRouter) ;
-// app.use("/room" , roomRouter) ;
+app.use("/room" , roomRouter) ;
 module.exports = app ;

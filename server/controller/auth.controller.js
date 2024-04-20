@@ -55,8 +55,9 @@ module.exports.login = async(req , res) => {
             })
         }
         const verifyPassword = comparePassword(user.password , password) ;
+        console.log(await verifyPassword) ;
         
-        if (verifyPassword) {
+        if (await verifyPassword) {
             const token = await createToken(user.id) ;
             return res.status(200).json({
                 status : true ,

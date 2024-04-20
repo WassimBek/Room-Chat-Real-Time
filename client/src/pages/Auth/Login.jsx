@@ -12,7 +12,7 @@ export default function Login() {
   return (
     <div className="sm:w-[500px] w-[80%] mx-auto pt-10 mt-16">
     <h2 className="font-bold text-2xl text-center">Login</h2>
-    <Form>
+    <Form method='POST'>
         <FormControl isRequired marginY={2}>
             <FormLabel>email adress  : </FormLabel>
             <Input 
@@ -42,7 +42,7 @@ export default function Login() {
             </InputGroup>
         </FormControl>
         <div className="text-center">
-        <Button  type="submit" bgColor="transparent" border="2px solid #12182B" _hover={{bgColor : '#12182B' , color : "white"}} className="mt-4">Login</Button>
+            <Button  type="submit" bgColor="transparent" border="2px solid #12182B" _hover={{bgColor : '#12182B' , color : "white"}} className="mt-4">Login</Button>
         </div>
     </Form>
 </div>
@@ -50,7 +50,7 @@ export default function Login() {
 }
 
 export const SubmitLogin = async({request}) => {
-    const dispatch = useDispatch() ;
+    // const dispatch = useDispatch() ;
     const data = await request.formData() ;
     const body = {
         email : data.get('email') ,
@@ -58,8 +58,11 @@ export const SubmitLogin = async({request}) => {
     }
     try {
         const url = "http://localhost:8080/auth/login" ;
-        const response = await axios.get(url , body) ;
-        dispatch(login({username : response.data.user.username , email : body.email , id : response.data.user.id}))
+        const response = await axios.post(url , body) ;
+        // dispatch(login({username : response.data.user.username , email : body.email , id : response.data.user.id}))
+        localStorage.setItem("JWT" , response.data.token) ;
+        localStorage.setItem("ID" , response.data.user.id) ;
+        console.log(response.data) ;
         return redirect("/") ;
     } catch (error) {
         console.error("err:  "+ error.response.data) ;

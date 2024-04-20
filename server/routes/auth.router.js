@@ -10,7 +10,7 @@ router
 
 router
     .route("/login")
-    .get(authController.login) ;
+    .post(authController.login) ;
 
 router
     .route("/otp-verification")
