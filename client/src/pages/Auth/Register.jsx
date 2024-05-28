@@ -54,7 +54,7 @@ export default function Register() {
                     name="password"
                     />
                     <InputRightElement width='4.5rem' >
-                        <IconButton bgColor="transparent" variant="ghost" size='xs' as={show ? ViewIcon : ViewOffIcon} onClick={handleClick}/>
+                        <IconButton className="cursor-pointer" bgColor="transparent" variant="ghost" size='xs' as={show ? ViewIcon : ViewOffIcon} onClick={handleClick}/>
                     </InputRightElement>
                 </InputGroup>
                 {error && error.message.password && <p className="text-red-500">{error.message.password}</p>}
@@ -79,6 +79,7 @@ export const SubmitRegister = async({request}) => {
     try {
         const url = "http://localhost:8080/auth/register" ;
         const resposne = await axios.post(url , body) ;
+        console.log(resposne) ;
         localStorage.setItem("JWT" , resposne.data.token) ;
         localStorage.setItem("ID" , resposne.data.user.id) ;
         return redirect("/") ;

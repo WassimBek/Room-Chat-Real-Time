@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 module.exports = async(req , res , next) => {
     try {
+        console.log("Here")
         const token = req.headers.authorization ;
         if (!token) {
             throw Error("unauthorized")

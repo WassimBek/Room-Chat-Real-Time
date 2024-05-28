@@ -1,10 +1,8 @@
-import {Form, redirect, useActionData} from 'react-router-dom'
+import {Form, useActionData} from 'react-router-dom'
 import {FormControl , FormLabel , Input , InputGroup , InputRightElement , IconButton , Button} from '@chakra-ui/react'
 import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
 import {useState} from 'react'
 import axios from 'axios'
-import { useDispatch} from 'react-redux'
-import {login} from '../../redux/slice/userSlice'
 export default function Login() {
     const [show , setShow] =useState(false)
     const handleClick = () => setShow(!show)
@@ -20,7 +18,7 @@ export default function Login() {
              paddingX="18px" 
              paddingY="18px"
             border="1px solid #12182B" type="text" name="email" placeholder="Enter Username"/>
-            {error && error.message.email && <p className="text-red-500">{error.message.email}</p>}
+            {error && error.email && <p className="text-red-500">{error.email}</p>}
         </FormControl>
         <FormControl isRequired>
             <FormLabel>password  : </FormLabel>
@@ -35,7 +33,8 @@ export default function Login() {
                 placeholder='Enter password'
                 name='password'
                 />
-                {error && error.message.password && <p className="text-red-500">{error.message.password}</p>}
+                <br/>
+                {error && error.password && <p className="text-red-500">{error.password}</p>}
                 <InputRightElement width='4.5rem' >
                     <IconButton bgColor="transparent" variant="ghost" size='xs' as={show ? ViewIcon : ViewOffIcon} onClick={handleClick}/>
                 </InputRightElement>
@@ -62,10 +61,11 @@ export const SubmitLogin = async({request}) => {
         // dispatch(login({username : response.data.user.username , email : body.email , id : response.data.user.id}))
         localStorage.setItem("JWT" , response.data.token) ;
         localStorage.setItem("ID" , response.data.user.id) ;
-        console.log(response.data) ;
-        return redirect("/") ;
+        return location.href = "/" ;
     } catch (error) {
         console.error("err:  "+ error.response.data) ;
-        return error.response.data ;
+        const {email , password} = error.response.data.message ;
+        console.log(error.response.data );
+        return {email , password} ;
     }
 }

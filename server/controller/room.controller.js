@@ -139,7 +139,7 @@ module.exports.leaveRoom = async(req , res) => {
 module.exports.getRooms = async(req , res) => {
     const prisma = req.prisma ;
     try {
-        const room = await prisma.user.find({
+        const room = await prisma.user.findUnique({
             where : {
                 id : req.params.id_user ,
             },

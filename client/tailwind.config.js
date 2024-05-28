@@ -11,6 +11,10 @@ export default {
         'primary-blue' : '#12182B' ,
         'primary-yellow' : '#FFC700' ,
         'primary-grey' : '#E7ECFF' ,
+      },
+      gridTemplateColumns : {
+        'aside-bar' : "70% 30%" ,
+        'aside-franction' : "1fr 1fr"
       }
     },
   },
