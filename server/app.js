@@ -4,6 +4,7 @@ const prisma = new PrismaClient() ;
 const app = express() ;
 const authRouter = require("./routes/auth.router") ;
 const roomRouter = require("./routes/room.router") ;
+const chatRouter = require("./routes/chat.router") ;
 const handelExpiredOtp = require("./middleware/removeExpiredOtp");
 const morgan = require("morgan") ;
 const cors = require("cors") ;
@@ -31,4 +32,5 @@ app.use( (req , res , next) => {
 
 app.use("/auth" , authRouter) ;
 app.use("/room" , roomRouter) ;
+app.use("/chat") ;
 module.exports = app ;
