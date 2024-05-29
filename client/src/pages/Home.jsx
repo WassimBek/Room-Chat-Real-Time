@@ -16,9 +16,7 @@ export default function Home() {
     const token = localStorage.getItem("JWT");
     if (token) {
       try {
-        const url = `http://localhost:8080/room/get-rooms/${localStorage.getItem(
-          "ID"
-        )}`;
+        const url = `http://localhost:8080/room/get-rooms`;
         const response = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });

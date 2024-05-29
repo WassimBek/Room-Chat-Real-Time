@@ -21,7 +21,7 @@ router
     .delete(checkAuth , roomController.leaveRoom) ;
 
 router
-    .route("/get-rooms/:id_user")
+    .route("/get-rooms")
     .get(checkAuth , roomController.getRooms) ;
 
 module.exports = router ;

@@ -141,7 +141,7 @@ module.exports.getRooms = async(req , res) => {
     try {
         const room = await prisma.user.findUnique({
             where : {
-                id : req.params.id_user ,
+                id : req.user.id ,
             },
             include: {
                 room: {
