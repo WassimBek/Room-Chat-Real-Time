@@ -6,6 +6,7 @@
     margin : 0px ;
     padding : 0px ;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
 .registre {
@@ -14,4 +15,8 @@
 
 .active {
   background-color: "green";
+}
+
+main::-webkit-scrollbar {
+  display: none;
 }

@@ -5,13 +5,11 @@ import { useEffect, useState } from "react";
 import AsideLayout from "../layout/AsideLayout";
 import {HamburgerIcon} from "@chakra-ui/icons"
 import {
-  Icon,
   SimpleGrid,
 } from "@chakra-ui/react";
 import RoomCard from "../components/Card.component";
 export default function Home() {
   const dispatch = useDispatch();
-  const [roomNumbers, setRoomNumbers] = useState(0);
   const [rooms, setRooms] = useState([]);
   const [isChecked , setIsChecked] = useState(true) ;
   const AuthorizationLoader = async () => {
@@ -42,18 +40,16 @@ export default function Home() {
   };
   useEffect(() => {
     AuthorizationLoader().then((room) => {
-      setRoomNumbers(room.room.length);
       setRooms(room.room);
-      console.log(room.room);
     });
   }, []);
   return (
-    <div className={"grid h-[85%] w-full " + (isChecked ? "grid-cols-aside-bar-checked" : "grid-cols-aside-bar")}>
-      <main>
+    <div className={"grid h-[85%] w-full duration-200 ease-in-out " + (isChecked ? "grid-cols-aside-bar-checked" : "grid-cols-aside-bar")}>
+      <main className="overflow-y-auto">
         <h1 className="text-2xl text-center font-bold pt-10 mb-10">
           Welcome to Room-Chat-realtime
         </h1>
-        {roomNumbers == 0 ? (
+        {rooms.length == 0  ? (
           <>
             <h2 className="text-2xl text-center font-bold pt-10">
               No room yet
