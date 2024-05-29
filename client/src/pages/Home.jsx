@@ -3,13 +3,16 @@ import axios from "axios";
 import { login } from "../redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import AsideLayout from "../layout/AsideLayout";
+import {
+  SimpleGrid,
+} from "@chakra-ui/react";
+import RoomCard from "../components/Card.component";
 export default function Home() {
   const dispatch = useDispatch();
-  const [room, setRoom] = useState(0);
-
+  const [roomNumbers, setRoomNumbers] = useState(0);
+  const [rooms, setRooms] = useState([]);
   const AuthorizationLoader = async () => {
     const token = localStorage.getItem("JWT");
-    console.log(token);
     if (token) {
       try {
         const url = `http://localhost:8080/room/get-rooms/${localStorage.getItem(
@@ -29,29 +32,47 @@ export default function Home() {
         return response.data.room;
       } catch (error) {
         console.error(`ERROR : ${error.message}`);
-        return location.href = "/Login";
+        return (location.href = "/Login");
       }
     }
-    return location.href = "/Login";
+    return (location.href = "/Login");
   };
   useEffect(() => {
-    AuthorizationLoader().then((room)=> {
-      console.log(room.room.length)
-      setRoom(room.room.length)
-    })
-    
+    AuthorizationLoader().then((room) => {
+      setRoomNumbers(room.room.length);
+      setRooms(room.room);
+      console.log(room.room);
+    });
   }, []);
   return (
     <div className="grid grid-cols-aside-bar h-[85%] w-[100%]">
-      <main className="">
-        <h1 className="text-2xl text-center font-bold pt-10">
+      <main>
+        <h1 className="text-2xl text-center font-bold pt-10 mb-10">
           Welcome to Room-Chat-realtime
         </h1>
-        <h2 className="text-2xl text-center font-bold pt-10">
-          You have {room} rooms
-        </h2>
+        {roomNumbers == 0 ? (
+          <>
+            <h2 className="text-2xl text-center font-bold pt-10">
+              No room yet
+            </h2>
+          </>
+        ) : (
+          <>
+            <div>
+              <SimpleGrid
+                spacing={4}
+                templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
+                padding={2}
+              >
+                {rooms.map((room, index) => (
+                  <RoomCard index={index} room={room} setRoom={setRooms}/>
+                ))}
+              </SimpleGrid>
+            </div>
+          </>
+        )}
       </main>
-      <AsideLayout />
+      <AsideLayout setRoom={setRooms}/>
     </div>
   );
 }

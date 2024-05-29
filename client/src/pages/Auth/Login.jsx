@@ -49,7 +49,6 @@ export default function Login() {
 }
 
 export const SubmitLogin = async({request}) => {
-    // const dispatch = useDispatch() ;
     const data = await request.formData() ;
     const body = {
         email : data.get('email') ,
@@ -58,7 +57,6 @@ export const SubmitLogin = async({request}) => {
     try {
         const url = "http://localhost:8080/auth/login" ;
         const response = await axios.post(url , body) ;
-        // dispatch(login({username : response.data.user.username , email : body.email , id : response.data.user.id}))
         localStorage.setItem("JWT" , response.data.token) ;
         localStorage.setItem("ID" , response.data.user.id) ;
         return location.href = "/" ;

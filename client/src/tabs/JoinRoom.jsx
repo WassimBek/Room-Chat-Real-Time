@@ -1,10 +1,30 @@
 import { Form } from "react-router-dom";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
-export default function JoinRoom() {
+import axios from "axios";
+import { useState } from "react";
+export default function JoinRoom({setRoom}) {
+  const [roomCodeError , setRoomCodeError] = useState('');
+  const HandelJoinRoom = async(e) => {
+    e.preventDefault();
+    const body = {
+      room_code : Number(e.target.code.value) 
+    };
+    try {
+      const url = `http://localhost:8080/room/join` ;
+      const response = await axios.post(url, body, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('JWT')}`,
+        },
+      });
+      location.reload();
+    } catch (error) {
+      setRoomCodeError(error.response.data.message) ;
+    }
+  }
   return (
     <div>
       <h1 className="text-2xl font-bold mb-8">Join Room</h1>
-      <Form method="POST">
+      <Form method="POST" onSubmit={HandelJoinRoom}>
         <FormControl isRequired marginY={2}>
           <FormLabel>Room Code : </FormLabel>
           <Input
@@ -13,9 +33,10 @@ export default function JoinRoom() {
             paddingY="18px"
             border="1px solid #12182B"
             type="number"
-            name="name"
+            name="code"
             placeholder="Room Code..."
           />
+          {roomCodeError && <p className="text-red-500">{roomCodeError}</p>}
         </FormControl>
         <Button
           bgColor={"transparent"}

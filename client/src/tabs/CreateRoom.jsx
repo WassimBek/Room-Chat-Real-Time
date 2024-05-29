@@ -3,12 +3,12 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function CreateRoom() {
+export default function CreateRoom({setRoom}) {
   const [title, setTitle] = useState('');
   const navigate = useNavigate();
 
   const CreateRoomHandler = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
     const body = { title };
 
     try {
@@ -18,8 +18,10 @@ export default function CreateRoom() {
           Authorization: `Bearer ${localStorage.getItem('JWT')}`,
         },
       });
-      console.log(response.data);
-      navigate('/'); // Navigate to a different route on success
+      setRoom(room => {
+        return [...room, response.data.room]
+      })
+      navigate('/'); 
     } catch (error) {
       console.log(error);
       alert('An error occurred while creating the room.');

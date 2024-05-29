@@ -79,7 +79,6 @@ export const SubmitRegister = async({request}) => {
     try {
         const url = "http://localhost:8080/auth/register" ;
         const resposne = await axios.post(url , body) ;
-        console.log(resposne) ;
         localStorage.setItem("JWT" , resposne.data.token) ;
         localStorage.setItem("ID" , resposne.data.user.id) ;
         return redirect("/") ;

@@ -143,9 +143,15 @@ module.exports.getRooms = async(req , res) => {
             where : {
                 id : req.params.id_user ,
             },
-            include : {
-                room : true ,
+            include: {
+                room: {
+                    include: {
+                        room_code: true,
+                        user: true,
+                    }
+                }
             }
+            
         })
         return res.status(200).json({
             status : true ,
