@@ -13,7 +13,8 @@ export default {
         'primary-grey' : '#E7ECFF' ,
       },
       gridTemplateColumns : {
-        'aside-bar' : "70% 30%" ,
+        'aside-bar-checked' : "65% 5% 30%" ,
+        'aside-bar' : "95% 5% 0%" ,
         'aside-franction' : "1fr 1fr"
       }
     },

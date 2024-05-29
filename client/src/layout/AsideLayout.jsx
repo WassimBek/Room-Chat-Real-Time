@@ -15,7 +15,7 @@ function AsideLayout({setRoom}) {
               <CreateRoom setRoom={setRoom} />
             </TabPanel>
             <TabPanel>
-                <JoinRoom setRoom={setRoom}/>
+                <JoinRoom/>
             </TabPanel>
           </TabPanels>
         </Tabs>

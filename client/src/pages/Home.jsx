@@ -3,7 +3,9 @@ import axios from "axios";
 import { login } from "../redux/slice/userSlice";
 import { useEffect, useState } from "react";
 import AsideLayout from "../layout/AsideLayout";
+import {HamburgerIcon} from "@chakra-ui/icons"
 import {
+  Icon,
   SimpleGrid,
 } from "@chakra-ui/react";
 import RoomCard from "../components/Card.component";
@@ -11,6 +13,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const [roomNumbers, setRoomNumbers] = useState(0);
   const [rooms, setRooms] = useState([]);
+  const [isChecked , setIsChecked] = useState(true) ;
   const AuthorizationLoader = async () => {
     const token = localStorage.getItem("JWT");
     if (token) {
@@ -45,7 +48,7 @@ export default function Home() {
     });
   }, []);
   return (
-    <div className="grid grid-cols-aside-bar h-[85%] w-[100%]">
+    <div className={"grid h-[85%] w-full " + (isChecked ? "grid-cols-aside-bar-checked" : "grid-cols-aside-bar")}>
       <main>
         <h1 className="text-2xl text-center font-bold pt-10 mb-10">
           Welcome to Room-Chat-realtime
@@ -65,14 +68,19 @@ export default function Home() {
                 padding={2}
               >
                 {rooms.map((room, index) => (
-                  <RoomCard index={index} room={room} setRoom={setRooms}/>
+                  <RoomCard key={index} index={index} room={room} setRoom={setRooms}/>
                 ))}
               </SimpleGrid>
             </div>
           </>
         )}
       </main>
-      <AsideLayout setRoom={setRooms}/>
+      <div className="relative">
+        <HamburgerIcon onClick={() => {
+          setIsChecked(!isChecked)
+        }} fontSize={40} position={"absolute"} right={0}  p={1} cursor={"pointer"}/>
+      </div>
+      { isChecked && <AsideLayout setRoom={setRooms}/>}
     </div>
   );
 }
