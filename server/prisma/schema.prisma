@@ -42,7 +42,7 @@ model message {
   updated_at DateTime? @updatedAt
   user       user      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id    String
-  room       room      @relation(fields: [roomId], references: [id])
+  room       room      @relation(fields: [roomId], references: [id], onDelete : Cascade)
   roomId     String
 }
 

@@ -32,3 +32,30 @@ module.exports.createMessage = async(req , res) => {
         })
     }
 }
+
+module.exports.getRoomMessages = async(req , res) => {
+    const prisma = req.prisma ;
+    const {id_room} = req.params ;
+    try {
+        const messages = await prisma.message.findMany({
+            where : {
+                room : {
+                    id : id_room
+                }
+            },
+            include : {
+                user : true
+            }
+        })
+        return res.status(200).json({
+            status : true,
+            message : "Messages recieved successfully",
+            data : messages
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status : false,
+            message : error.message
+        })
+    }
+}

@@ -8,7 +8,7 @@ router
 
 router
     .route("/get/:id_room")
-    .get(checkAuth)
+    .get(checkAuth , messageController.getRoomMessages)
 
 router
     .route("/delete/:id_room")
