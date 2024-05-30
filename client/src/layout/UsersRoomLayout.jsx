@@ -28,9 +28,9 @@ export default function UsersRoomLayout() {
   }, []);
 
   return (
-    <div className="bg-white h-full">
-      <div className="bg-white shadow-md p-4 h-[10%]">
-        <h1 className="text-2xl text-center font-bold">Users</h1>
+    <div className="bg-white h-full border-r-2">
+      <div className="bg-white  p-4 h-[10%] border-b-2 flex justify-center place-items-center">
+        <h1 className="text-2xl font-bold">Users</h1>
       </div>
       <div className="p-2 overflow-y-auto remove_scroll_bar h-[90%]">
         {user.map((user) => (
@@ -41,34 +41,6 @@ export default function UsersRoomLayout() {
             </div>
           </>
         ))}
-        {/* <div className="shadow-md p-3">
-          <h1 className="text-xl font-bold">selma</h1>
-          <p>batatab007@gmail.com</p>
-        </div>
-        <div className="shadow-md p-3">
-          <h1 className="text-xl font-bold">selma</h1>
-          <p>batatab007@gmail.com</p>
-        </div>
-        <div className="shadow-md p-3">
-          <h1 className="text-xl font-bold">selma</h1>
-          <p>batatab007@gmail.com</p>
-        </div>
-        <div className="shadow-md p-3">
-          <h1 className="text-xl font-bold">selma</h1>
-          <p>batatab007@gmail.com</p>
-        </div>
-        <div className="shadow-md p-3">
-          <h1 className="text-xl font-bold">selma</h1>
-          <p>batatab007@gmail.com</p>
-        </div>
-        <div className="shadow-md p-3">
-          <h1 className="text-xl font-bold">selma</h1>
-          <p>batatab007@gmail.com</p>
-        </div>
-        <div className="shadow-md p-3">
-          <h1 className="text-xl font-bold">selma</h1>
-          <p>batatab007@gmail.com</p>
-        </div> */}
       </div>
     </div>
   );

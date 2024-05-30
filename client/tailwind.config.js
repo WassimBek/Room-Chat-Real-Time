@@ -15,7 +15,10 @@ export default {
       gridTemplateColumns : {
         'aside-bar-checked' : "65% 5% 30%" ,
         'aside-bar' : "95% 5% 0%" ,
-        'chat-grid' : "25% 75%"
+        'chat-grid' : "25% 75%" ,
+      },
+      gridTemplateRows : {
+        'chat-devider' : "10% 65% 25%"
       }
     },
   },
