@@ -1,7 +1,6 @@
 module.exports = async(req , res , next) => {
     const prisma = req.prisma ;
     const {room_code} = req.body ;
-    console.log("here");
     try {
         const room = await prisma.room_code.findFirst({
             where : { 

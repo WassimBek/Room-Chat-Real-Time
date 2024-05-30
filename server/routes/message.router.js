@@ -3,14 +3,11 @@ const router = Router() ;
 const checkAuth = require("../middleware/checkAuth.middleware") ;
 const messageController = require("../controller/chat.controller")
 router
-    .route("/add/:id_room")
+    .route("/add-message/:id_room")
     .post(checkAuth , messageController.createMessage)
 
 router
-    .route("/get/:id_room")
+    .route("/get-messages/:id_room")
     .get(checkAuth , messageController.getRoomMessages)
 
-router
-    .route("/delete/:id_room")
-    .delete(checkAuth)
 module.exports = router ;
