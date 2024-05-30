@@ -7,8 +7,9 @@ import {
     Button
 } from "@chakra-ui/react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 export default function RoomCard({index , room , setRoom}) {
-
+  const navigate = useNavigate() ;
     const DeleteRoom = async(room_id) => {
         try {
             const url = `http://localhost:8080/room/remove/${room_id}` ;
@@ -39,6 +40,7 @@ export default function RoomCard({index , room , setRoom}) {
           color="white"
           _hover={{ bg: "#0f1626" }}
           variant="solid"
+          onClick={() => navigate(`/chat/${room.id}`)}
         >
           Chat here
         </Button>

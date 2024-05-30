@@ -4,6 +4,7 @@ import RootLayout from './layout/RootLayout'
 import Register, { SubmitRegister } from './pages/Auth/Register'
 import Login, { SubmitLogin } from './pages/Auth/Login'
 import Home  from './pages/Home'
+import ChatPage from './pages/chat/ChatPage'
 // import { CreateRoomHandeler } from './tabs/CreateRoom'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path='/register' element={<Register />} action={SubmitRegister}/>
         <Route path='/login' element={<Login />} action={SubmitLogin}/>
         <Route index element={<Home />} />
+        <Route path='/chat/:id' element={<ChatPage />}/>
       </Route>
     )
   )

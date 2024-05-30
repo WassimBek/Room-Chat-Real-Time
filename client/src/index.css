@@ -20,3 +20,7 @@
 main::-webkit-scrollbar {
   display: none;
 }
+
+.remove_scroll_bar::-webkit-scrollbar {
+  display: none;
+}
