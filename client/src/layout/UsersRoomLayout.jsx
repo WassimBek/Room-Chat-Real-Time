@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import {setRoom} from "../redux/slice/roomSlice"
 export default function UsersRoomLayout() {
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
+  const dispatch = useDispatch() ;
   const FetchUsers = async () => {
     const url = `http://localhost:8080/room/get-single-room/${id}`;
     try {
@@ -13,7 +16,7 @@ export default function UsersRoomLayout() {
           Authorization: `Bearer ${localStorage.getItem("JWT")}`,
         },
       });
-      console.log(response.data.room);
+      dispatch(setRoom({room_name : response.data.room.title , room_code :response.data.room.room_code.code }))
       return response.data.room.user;
     } catch (error) {
       console.log(error);
@@ -23,7 +26,6 @@ export default function UsersRoomLayout() {
   useEffect(() => {
     FetchUsers().then((user) => {
       setUser(user);
-      console.log(user);
     });
   }, []);
 

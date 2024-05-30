@@ -9,7 +9,7 @@ import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function MessageForm() {
+export default function MessageForm({setMsg}) {
   const [isTyping, setIsTyping] = useState(false);
   const [message, setMessage] = useState("");
   const {id} = useParams() ;
@@ -25,7 +25,7 @@ export default function MessageForm() {
                 Authorization : `Bearer ${localStorage.getItem('JWT')}`
             }
         })
-        console.log(response.data.data) ;
+        setMsg(msg => [...msg, response.data.data]) ;
     } catch (error) {
         console.error(error) ;
         navigate("/login") ;

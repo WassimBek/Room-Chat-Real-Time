@@ -18,7 +18,6 @@ export default function RoomCard({index , room , setRoom}) {
                     Authorization: `Bearer ${localStorage.getItem("JWT")}`,
                 },
             });
-            console.log('Delete Room Successful') ;
             setRoom(rm => rm.filter(r => r.id !== room_id)) ;
             return ;
         } catch (error) {
