@@ -166,3 +166,31 @@ module.exports.getRooms = async(req , res) => {
         })
     }
 }
+
+module.exports.getSingleRoom = async(req , res) => {
+    const prisma = req.prisma ;
+    const {room_id} = req.params ;
+    try {
+        const room = await prisma.room.findUnique({
+            where :{
+                id: room_id
+            },
+            include : {
+                user : true,
+                room_code : true,
+            }
+        })
+        return res.status(200).json({
+            status : true,
+            message : "Room retrieved successfully",
+            room : room,
+        })
+    } catch (error) {
+        console.error(error.message) ;
+        return res.status(500).json({
+            status : false,
+            message : "Room retrieval failed",
+            error : error.message,
+        })
+    }
+}

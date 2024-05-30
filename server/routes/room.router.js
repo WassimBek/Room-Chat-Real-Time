@@ -24,4 +24,8 @@ router
     .route("/get-rooms")
     .get(checkAuth , roomController.getRooms) ;
 
+router
+    .route("/get-single-room/:room_id")
+    .get(checkAuth , roomController.getSingleRoom) ;
+
 module.exports = router ;
