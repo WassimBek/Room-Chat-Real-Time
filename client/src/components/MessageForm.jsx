@@ -25,7 +25,10 @@ export default function MessageForm({setMsg}) {
                 Authorization : `Bearer ${localStorage.getItem('JWT')}`
             }
         })
-        setMsg(msg => [...msg, response.data.data]) ;
+        console.log(response.data.data) ;
+        setMsg(msg => 
+          [...msg, response.data.data]
+        ) ;
     } catch (error) {
         console.error(error) ;
         navigate("/login") ;

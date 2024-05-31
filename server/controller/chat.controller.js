@@ -18,7 +18,10 @@ module.exports.createMessage = async(req , res) => {
                         id : id_room
                     }
                 }
-            },  
+            },
+            include : {
+                user : true
+            }
         })
         return res.status(201).json({
             message : 'Room created succefully ' ,
@@ -45,6 +48,9 @@ module.exports.getRoomMessages = async(req , res) => {
             },
             include : {
                 user : true
+            },
+            orderBy : {
+                created_at : "asc"
             }
         })
         return res.status(200).json({
@@ -53,6 +59,7 @@ module.exports.getRoomMessages = async(req , res) => {
             data : messages
         })
     } catch (error) {
+        console.log(error.message)
         return res.status(500).json({
             status : false,
             message : error.message
