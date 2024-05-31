@@ -16,7 +16,13 @@ export default function JoinRoom({setRoom}) {
           Authorization: `Bearer ${localStorage.getItem('JWT')}`,
         },
       });
-      location.reload();
+      setRoom(room => {
+        return [...room, response.data.room]
+      })
+      // socket.emit('join_room' , {
+      //   room : response.data.room.id
+      // })
+      e.target.code.value = '' ;
     } catch (error) {
       setRoomCodeError(error.response.data.message) ;
     }

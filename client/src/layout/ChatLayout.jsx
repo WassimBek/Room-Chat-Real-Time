@@ -16,7 +16,7 @@ export default function ChatLayout() {
         <Chat message={messages} setMessage={setMessages} />
       </div>
       <div className="mt-2">
-        <MessageForm setMsg={setMessages} msg={messages}/>
+        <MessageForm setMsg={setMessages} msg={messages} />
       </div>
     </div>
   );

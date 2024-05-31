@@ -1,12 +1,10 @@
 import axios from "axios";
 import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-export default function Chat({ message, setMessage }) {
+export default function Chat({ message, setMessage}) {
   const { id } = useParams();
   const navigate = useNavigate();
   const chatContainerRef = useRef(null);
-
   const GetRoomMessages = async () => {
     const url = `http://localhost:8080/chat/get-messages/${id}`;
     try {
@@ -32,6 +30,13 @@ export default function Chat({ message, setMessage }) {
     const chatContainer = chatContainerRef.current;
     chatContainer.scrollTop = chatContainer.scrollHeight;
   }, [message]);
+
+  // useEffect(()=> {
+  //   console.log("here") ;
+  //   // socket.on("recieve_message", (data) => {
+  //   //   setMessage((msg) => [...msg, data]);
+  //   // });
+  // } , [])
 
   return (
     <div ref={chatContainerRef} className="w-full h-full overflow-y-auto p-4">

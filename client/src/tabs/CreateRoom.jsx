@@ -2,7 +2,6 @@ import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 export default function CreateRoom({setRoom}) {
   const [title, setTitle] = useState('');
   const navigate = useNavigate();
@@ -21,7 +20,8 @@ export default function CreateRoom({setRoom}) {
       setRoom(room => {
         return [...room, response.data.room]
       })
-      navigate('/'); 
+      // socket.emit('join_room' , response.data.room.id)
+      setTitle('') ;
     } catch (error) {
       console.log(error);
       alert('An error occurred while creating the room.');

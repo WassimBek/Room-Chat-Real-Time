@@ -74,7 +74,7 @@ export default function Home() {
           setIsChecked(!isChecked)
         }} fontSize={40} position={"absolute"} right={0}  p={1} cursor={"pointer"}/>
       </div>
-      { isChecked && <AsideLayout setRoom={setRooms}/>}
+      { isChecked && <AsideLayout setRoom={setRooms} />}
     </div>
   );
 }

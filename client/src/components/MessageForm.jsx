@@ -8,7 +8,6 @@ import axios from "axios";
 import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
-
 export default function MessageForm({setMsg}) {
   const [isTyping, setIsTyping] = useState(false);
   const [message, setMessage] = useState("");
@@ -29,6 +28,11 @@ export default function MessageForm({setMsg}) {
         setMsg(msg => 
           [...msg, response.data.data]
         ) ;
+        // socket.emit('send-message' , {
+        //   message : response.data.data.message,
+        //   user : response.data.data.user,
+        //   room : response.data.data.room
+        // })
     } catch (error) {
         console.error(error) ;
         navigate("/login") ;

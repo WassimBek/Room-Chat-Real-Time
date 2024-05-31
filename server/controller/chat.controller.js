@@ -20,7 +20,8 @@ module.exports.createMessage = async(req , res) => {
                 }
             },
             include : {
-                user : true
+                user : true ,
+                room : true,
             }
         })
         return res.status(201).json({

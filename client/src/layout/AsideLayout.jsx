@@ -1,7 +1,7 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import CreateRoom from '../tabs/CreateRoom';
 import JoinRoom from '../tabs/JoinRoom';
-function AsideLayout({setRoom}) {
+function AsideLayout({setRoom }) {
   return (
     <aside className="border-2">
       <div>
@@ -12,10 +12,10 @@ function AsideLayout({setRoom}) {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <CreateRoom setRoom={setRoom} />
+              <CreateRoom setRoom={setRoom}/>
             </TabPanel>
             <TabPanel>
-                <JoinRoom/>
+                <JoinRoom setRoom={setRoom}/>
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -28,7 +28,7 @@ export default function RootLayout() {
               }  
             </div>
         </nav>
-            <Outlet />
+            <Outlet/>
     </div>
   )
 }
