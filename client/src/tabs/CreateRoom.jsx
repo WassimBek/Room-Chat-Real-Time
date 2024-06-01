@@ -1,10 +1,9 @@
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import socket from "../Socket"
 export default function CreateRoom({setRoom}) {
   const [title, setTitle] = useState('');
-  const navigate = useNavigate();
 
   const CreateRoomHandler = async (event) => {
     event.preventDefault();
@@ -20,7 +19,7 @@ export default function CreateRoom({setRoom}) {
       setRoom(room => {
         return [...room, response.data.room]
       })
-      // socket.emit('join_room' , response.data.room.id)
+      socket.emit("join_room" , response.data.room.id)
       setTitle('') ;
     } catch (error) {
       console.log(error);

@@ -17,19 +17,22 @@ io.on("connection" , (socket) => {
   console.log(`Connection established`) ;
 
   socket.on("join_room" , (room) => {
-    console.log(`User joined room`) ;
-    socket.join(room.room)
+    console.log("Join Room "+room)
+      socket.join(room) ;
   })
 
-  socket.on('send-message' , (message) => {
-    console.log('here') ;
-    console.log(message) ;
-    const body = {
-      message : message.message ,
-      user : {userame : message.username , id : message.user.id}  
-    }
-    socket.to(message.room.id).emit("recieve_message", body)
+  socket.on('send_message' , (message) => {
+    console.log(message)
+
+    socket.to(message.room_id).emit("recieve_message" , {
+      message
+    })
   } )
+
+  socket.on("delete_room" , (room) => {
+    socket.to(room).emit("delete_single" , room)
+  })
+
   socket.on("disconnect" , () => {
     console.log(`Connection closed`) ;
   }) ;

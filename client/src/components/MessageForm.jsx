@@ -8,6 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
+import socket from "../Socket"
 export default function MessageForm({setMsg}) {
   const [isTyping, setIsTyping] = useState(false);
   const [message, setMessage] = useState("");
@@ -24,15 +25,14 @@ export default function MessageForm({setMsg}) {
                 Authorization : `Bearer ${localStorage.getItem('JWT')}`
             }
         })
-        console.log(response.data.data) ;
         setMsg(msg => 
           [...msg, response.data.data]
         ) ;
-        // socket.emit('send-message' , {
-        //   message : response.data.data.message,
-        //   user : response.data.data.user,
-        //   room : response.data.data.room
-        // })
+        socket.emit("send_message" , {
+          room_id : response.data.data.room.id ,
+          message : message ,
+          user : response.data.data.user.username
+        })
     } catch (error) {
         console.error(error) ;
         navigate("/login") ;

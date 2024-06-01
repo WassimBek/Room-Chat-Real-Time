@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import socket from "../Socket"
 export default function Chat({ message, setMessage}) {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export default function Chat({ message, setMessage}) {
 
   useEffect(() => {
     GetRoomMessages().then((data) => {
+      console.log(data)
       setMessage(data);
     });
   }, []);
@@ -31,12 +33,11 @@ export default function Chat({ message, setMessage}) {
     chatContainer.scrollTop = chatContainer.scrollHeight;
   }, [message]);
 
-  // useEffect(()=> {
-  //   console.log("here") ;
-  //   // socket.on("recieve_message", (data) => {
-  //   //   setMessage((msg) => [...msg, data]);
-  //   // });
-  // } , [])
+  useEffect(()=> {
+    socket.on("recieve_message" , (message) => {
+      console.log("here " + message) ;
+    })
+  } , [socket])
 
   return (
     <div ref={chatContainerRef} className="w-full h-full overflow-y-auto p-4">

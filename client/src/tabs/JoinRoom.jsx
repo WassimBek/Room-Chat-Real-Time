@@ -2,6 +2,7 @@ import { Form } from "react-router-dom";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import socket from "../Socket"
 export default function JoinRoom({setRoom}) {
   const [roomCodeError , setRoomCodeError] = useState('');
   const HandelJoinRoom = async(e) => {
@@ -19,9 +20,7 @@ export default function JoinRoom({setRoom}) {
       setRoom(room => {
         return [...room, response.data.room]
       })
-      // socket.emit('join_room' , {
-      //   room : response.data.room.id
-      // })
+      socket.emit("join_room" , response.data.room.id)
       e.target.code.value = '' ;
     } catch (error) {
       setRoomCodeError(error.response.data.message) ;

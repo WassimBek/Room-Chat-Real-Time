@@ -8,6 +8,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import RoomCard from "../components/Card.component";
+import socket from "../Socket"
 export default function Home() {
   const dispatch = useDispatch();
   const [rooms, setRooms] = useState([]);
@@ -28,6 +29,7 @@ export default function Home() {
             exist: true,
           })
         );
+        // console.log(response.data.room) ;
         return response.data.room;
       } catch (error) {
         console.error(`ERROR : ${error.message}`);
@@ -39,6 +41,7 @@ export default function Home() {
   useEffect(() => {
     AuthorizationLoader().then((room) => {
       setRooms(room.room);
+      // socket.emit("join_room" , room.room)
     });
   }, []);
   return (
