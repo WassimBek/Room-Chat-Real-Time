@@ -29,7 +29,6 @@ export default function Home() {
             exist: true,
           })
         );
-        // console.log(response.data.room) ;
         return response.data.room;
       } catch (error) {
         console.error(`ERROR : ${error.message}`);
@@ -41,7 +40,6 @@ export default function Home() {
   useEffect(() => {
     AuthorizationLoader().then((room) => {
       setRooms(room.room);
-      // socket.emit("join_room" , room.room)
     });
   }, []);
   return (

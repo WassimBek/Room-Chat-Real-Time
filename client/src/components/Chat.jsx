@@ -16,14 +16,12 @@ export default function Chat({ message, setMessage}) {
       });
       return response.data.data;
     } catch (error) {
-      console.log(error);
-      navigate("/login");
+      navigate("/");
     }
   };
 
   useEffect(() => {
     GetRoomMessages().then((data) => {
-      console.log(data)
       setMessage(data);
     });
   }, []);
@@ -33,11 +31,18 @@ export default function Chat({ message, setMessage}) {
     chatContainer.scrollTop = chatContainer.scrollHeight;
   }, [message]);
 
-  useEffect(()=> {
-    socket.on("recieve_message" , (message) => {
-      console.log("here " + message) ;
-    })
-  } , [socket])
+  useEffect(() => {
+    const handleMessageReceive = (message) => {
+      setMessage((prevMessages) => [...prevMessages, message]);
+    };
+
+    socket.on("recieve_message", handleMessageReceive);
+
+    return () => {
+      socket.off("recieve_message", handleMessageReceive);
+    };
+  }, [socket, setMessage]);
+
 
   return (
     <div ref={chatContainerRef} className="w-full h-full overflow-y-auto p-4">
@@ -46,14 +51,14 @@ export default function Chat({ message, setMessage}) {
           <div
             key={msg.id}
             className={`mb-2 flex ${
-              msg.user.id === localStorage.getItem("ID")
+              msg.user_id === localStorage.getItem("ID")
                 ? "justify-end"
                 : "justify-start"
             }`}
           >
             <div
               className={`max-w-[60%] p-4 rounded-xl ${
-                msg.user.id === localStorage.getItem("ID")
+                msg.user_id === localStorage.getItem("ID")
                   ? "bg-primary-blue text-white"
                   : "bg-gray-200 text-black"
               }`}

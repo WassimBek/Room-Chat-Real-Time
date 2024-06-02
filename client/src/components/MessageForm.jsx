@@ -28,14 +28,10 @@ export default function MessageForm({setMsg}) {
         setMsg(msg => 
           [...msg, response.data.data]
         ) ;
-        socket.emit("send_message" , {
-          room_id : response.data.data.room.id ,
-          message : message ,
-          user : response.data.data.user.username
-        })
+        socket.emit("send_message" , response.data.data)
     } catch (error) {
         console.error(error) ;
-        navigate("/login") ;
+        navigate("/") ;
     }
     setMessage("");
     setIsTyping(false);

@@ -17,16 +17,14 @@ io.on("connection" , (socket) => {
   console.log(`Connection established`) ;
 
   socket.on("join_room" , (room) => {
-    console.log("Join Room "+room)
       socket.join(room) ;
   })
 
   socket.on('send_message' , (message) => {
-    console.log(message)
 
-    socket.to(message.room_id).emit("recieve_message" , {
+    socket.to(message.room.id).emit("recieve_message" , 
       message
-    })
+    )
   } )
 
   socket.on("delete_room" , (room) => {
