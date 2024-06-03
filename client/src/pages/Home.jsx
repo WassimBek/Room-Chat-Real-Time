@@ -43,12 +43,12 @@ export default function Home() {
     });
   }, []);
   return (
-    <div className={"grid h-[85%] w-full duration-200 ease-in-out " + (isChecked ? "grid-cols-aside-bar-checked" : "grid-cols-aside-bar")}>
+    <div className={"grid h-[85%] w-full duration-200 ease-in-out " + (isChecked ? "sm:grid-cols-aside-bar-checked sm:grid-rows-1 grid-rows-aside-bar-checked" : "sm:grid-cols-aside-bar sm:grid-rows-1 grid-rows-aside-bar")}>
       <main className="overflow-y-auto">
         <h1 className="text-2xl text-center font-bold pt-10 mb-10">
           Welcome to Room-Chat-realtime
         </h1>
-        {rooms.length == 0  ? (
+        {rooms && rooms.length == 0  ? (
           <>
             <h2 className="text-2xl text-center font-bold pt-10">
               No room yet
@@ -62,7 +62,7 @@ export default function Home() {
                 templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
                 padding={2}
               >
-                {rooms.map((room, index) => (
+                {rooms && rooms.map((room, index) => (
                   <RoomCard key={index} index={index} room={room} setRoom={setRooms}/>
                 ))}
               </SimpleGrid>

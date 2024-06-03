@@ -3,7 +3,7 @@ import CreateRoom from '../tabs/CreateRoom';
 import JoinRoom from '../tabs/JoinRoom';
 function AsideLayout({setRoom }) {
   return (
-    <aside className="border-2">
+    <aside className="border-2 h-full">
       <div>
         <Tabs colorScheme='#12182B'>
           <TabList >

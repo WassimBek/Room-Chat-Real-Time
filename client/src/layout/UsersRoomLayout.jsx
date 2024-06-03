@@ -31,6 +31,7 @@ export default function UsersRoomLayout() {
 
   return (
     <div className="bg-white h-full border-r-2">
+      
       <div className="bg-white  p-4 h-[10%] border-b-2 flex justify-center place-items-center">
         <h1 className="text-2xl font-bold">Users</h1>
       </div>
