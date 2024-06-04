@@ -1,4 +1,4 @@
-module.exports = (email) => {
+module.exports = async(email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+  return await emailRegex.test(email);
 };

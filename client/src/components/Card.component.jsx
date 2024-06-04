@@ -14,7 +14,7 @@ export default function RoomCard({index , room , setRoom}) {
   const navigate = useNavigate() ;
     const DeleteRoom = async(room_id) => {
         try {
-            const url = `http://localhost:8080/room/remove/${room_id}` ;
+            const url = `${import.meta.env.VITE_REACT_BASE_URL}/room/remove/${room_id}` ;
             const response = await axios.delete(url, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("JWT")}`,

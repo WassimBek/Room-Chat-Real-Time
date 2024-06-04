@@ -18,7 +18,7 @@ export default function RootLayout() {
               {user.exist ? (
                 <>
                   <p className="mr-2 registre">{user.username}</p>
-                  <NavLink className="registre" onClick={() => HandelLogout()}>Logout</NavLink>
+                  <p className="registre cursor-pointer" onClick={() => HandelLogout()}>Logout</p>
                 </>
               ) : (
                 <>

@@ -7,7 +7,7 @@ export default function Chat({ message, setMessage}) {
   const navigate = useNavigate();
   const chatContainerRef = useRef(null);
   const GetRoomMessages = async () => {
-    const url = `http://localhost:8080/chat/get-messages/${id}`;
+    const url = `${import.meta.env.VITE_REACT_BASE_URL}/chat/get-messages/${id}`;
     try {
       const response = await axios.get(url, {
         headers: {

@@ -19,7 +19,7 @@ export default function MessageForm({setMsg}) {
         message : message
     }
     try {
-        const url = `http://localhost:8080/chat/add-message/${id}` ;
+        const url = `${import.meta.env.VITE_REACT_BASE_URL}/chat/add-message/${id}` ;
         const response = await axios.post(url , body , {
             headers : {
                 Authorization : `Bearer ${localStorage.getItem('JWT')}`

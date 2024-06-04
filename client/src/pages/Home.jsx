@@ -17,7 +17,7 @@ export default function Home() {
     const token = localStorage.getItem("JWT");
     if (token) {
       try {
-        const url = `http://localhost:8080/room/get-rooms`;
+        const url = `${import.meta.env.VITE_REACT_BASE_URL}/room/get-rooms`;
         const response = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });

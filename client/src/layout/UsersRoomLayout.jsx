@@ -9,7 +9,7 @@ export default function UsersRoomLayout() {
   const { id } = useParams();
   const dispatch = useDispatch() ;
   const FetchUsers = async () => {
-    const url = `http://localhost:8080/room/get-single-room/${id}`;
+    const url = `${import.meta.env.VITE_REACT_BASE_URL}/room/get-single-room/${id}`;
     try {
       const response = await axios.get(url, {
         headers: {

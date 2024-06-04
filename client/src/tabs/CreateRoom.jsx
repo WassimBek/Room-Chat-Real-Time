@@ -10,7 +10,7 @@ export default function CreateRoom({setRoom}) {
     const body = { title };
 
     try {
-      const url = "http://localhost:8080/room/create";
+      const url = `${import.meta.env.VITE_REACT_BASE_URL}/room/create`;
       const response = await axios.post(url, body, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('JWT')}`,

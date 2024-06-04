@@ -11,7 +11,7 @@ export default function JoinRoom({setRoom}) {
       room_code : Number(e.target.code.value) 
     };
     try {
-      const url = `http://localhost:8080/room/join` ;
+      const url = `${import.meta.env.VITE_REACT_BASE_URL}/room/join` ;
       const response = await axios.post(url, body, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('JWT')}`,

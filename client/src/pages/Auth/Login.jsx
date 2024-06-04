@@ -55,7 +55,7 @@ export const SubmitLogin = async({request}) => {
         password : data.get('password') ,
     }
     try {
-        const url = "http://localhost:8080/auth/login" ;
+        const url = `${import.meta.env.VITE_REACT_BASE_URL}/auth/login` ;
         const response = await axios.post(url , body) ;
         localStorage.setItem("JWT" , response.data.token) ;
         localStorage.setItem("ID" , response.data.user.id) ;

@@ -77,7 +77,7 @@ export const SubmitRegister = async({request}) => {
         username : data.get('username') ,
     }
     try {
-        const url = "http://localhost:8080/auth/register" ;
+        const url = `${import.meta.env.VITE_REACT_BASE_URL}/auth/register` ;
         const resposne = await axios.post(url , body) ;
         localStorage.setItem("JWT" , resposne.data.token) ;
         localStorage.setItem("ID" , resposne.data.user.id) ;
