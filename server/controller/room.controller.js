@@ -116,10 +116,6 @@ module.exports.leaveRoom = async(req , res) => {
                         id : req.user.id
                     }
                 }
-            },
-            include : {
-                user : true ,
-                room_code : true ,
             }
         })
         return res.status(200).json({
