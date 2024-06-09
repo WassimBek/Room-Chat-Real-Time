@@ -4,7 +4,6 @@ const sendMailer = require("../utils/sendVerificationEmail");
 module.exports.register = async(req , res) => {
     const prisma = req.prisma ;
     const {username , name , email , password } = req.body ;
-    console.log(req.file) ;
     try {
         const pass = await hashPassword(password) ;
         const user = await prisma.user.create({

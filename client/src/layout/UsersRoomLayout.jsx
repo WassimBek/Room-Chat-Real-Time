@@ -40,7 +40,6 @@ export default function UsersRoomLayout() {
 
   useEffect(() => {
     const leaveRoom = (user_id) => {
-      console.log('gere');
       setUser((us) => us.filter((u) => u.id!== user_id));
     }
     Socket.on('leave_room' , leaveRoom)

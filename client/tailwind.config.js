@@ -21,7 +21,7 @@ export default {
       },
       gridTemplateRows : {
         'chat-devider' : "10% 65% 25%" ,
-        'aside-bar-checked' : "40% 7% 50%" ,
+        'aside-bar-checked' : "40% 7% 53%" ,
         'aside-bar' : "90% 10% 0%"
       }
     },
