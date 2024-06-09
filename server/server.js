@@ -31,6 +31,10 @@ io.on("connection" , (socket) => {
     socket.to(room).emit("delete_single" , room)
   })
 
+  socket.on("leave" , ({user_id , room_id}) => {
+    console.log(user_id , room_id);
+    socket.to(room_id).emit("leave_room" , user_id)
+  })
   socket.on("disconnect" , () => {
     console.log(`Connection closed`) ;
   }) ;

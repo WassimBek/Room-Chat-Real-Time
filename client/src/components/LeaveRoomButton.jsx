@@ -1,6 +1,7 @@
 import {Button} from '@chakra-ui/react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom'
+import Socket from '../Socket'
 export default function LeaveRoomButton() {
     const {id} = useParams() ;
     const navigate = useNavigate() ;
@@ -11,6 +12,7 @@ export default function LeaveRoomButton() {
                     Authorization: `Bearer ${localStorage.getItem("JWT")}`,
                 },
             })
+            Socket.emit('leave' , {user_id : localStorage.getItem("ID") , room_id : id})
             navigate('/') ;
         } catch (error) {
             console.log('Error : '+error) ;

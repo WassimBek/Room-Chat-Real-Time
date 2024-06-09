@@ -3,8 +3,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setRoom } from "../redux/slice/roomSlice";
-import { Button } from "@chakra-ui/react";
 import LeaveRoomButton from "../components/LeaveRoomButton";
+import Socket from "../Socket";
 export default function UsersRoomLayout() {
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
@@ -37,6 +37,18 @@ export default function UsersRoomLayout() {
       setUser(user);
     });
   }, []);
+
+  useEffect(() => {
+    const leaveRoom = (user_id) => {
+      console.log('gere');
+      setUser((us) => us.filter((u) => u.id!== user_id));
+    }
+    Socket.on('leave_room' , leaveRoom)
+
+    return () => {
+      Socket.off('leave_room' , leaveRoom)
+    }
+  } , [Socket , setUser]);
 
   return (
     <div className="bg-white grid  grid-rows-chat-devider border-r-2 relative">
