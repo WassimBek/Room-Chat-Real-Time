@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setRoom } from "../redux/slice/roomSlice";
 import LeaveRoomButton from "../components/LeaveRoomButton";
+import { FaVideo } from "react-icons/fa";
 import Socket from "../Socket";
 export default function UsersRoomLayout() {
   const [user, setUser] = useState([]);
@@ -51,8 +52,9 @@ export default function UsersRoomLayout() {
 
   return (
     <div className="bg-white grid  grid-rows-chat-devider border-r-2 relative">
-      <div className="bg-white  p-4 border-b-2 flex justify-center place-items-center">
+      <div className="bg-white  p-4 border-b-2 flex justify-between place-items-center">
         <h1 className="text-2xl font-bold">Users</h1>
+        <FaVideo fontSize={30} className="cursor-pointer"/>
       </div>
       <div className="p-2 overflow-y-auto remove_scroll_bar ">
         {user.map((user) => (
