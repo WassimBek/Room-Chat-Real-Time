@@ -14,8 +14,7 @@ const io = require("socket.io")(server , {
 }) ;
 
 io.on("connection" , (socket) => {
-  console.log(`Connection established`) ;
-
+  // room
   socket.on("join_room" , (room) => {
       socket.join(room) ;
   })
@@ -32,9 +31,18 @@ io.on("connection" , (socket) => {
   })
 
   socket.on("leave" , ({user_id , room_id}) => {
-    console.log(user_id , room_id);
+
     socket.to(room_id).emit("leave_room" , user_id)
   })
+
+  // video chat
+
+
+
+
+
+
+  // disconnect connection
   socket.on("disconnect" , () => {
     console.log(`Connection closed`) ;
   }) ;

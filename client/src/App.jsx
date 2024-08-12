@@ -5,7 +5,7 @@ import Register, { SubmitRegister } from './pages/Auth/Register'
 import Login, { SubmitLogin } from './pages/Auth/Login'
 import Home  from './pages/Home'
 import ChatPage from './pages/chat/ChatPage'
-import socket from './Socket' ;
+import VideoPage from "./pages/chat/VideoPage.jsx";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -14,6 +14,7 @@ function App() {
         <Route path='/login' element={<Login />} action={SubmitLogin}/>
         <Route index element={<Home />} />
         <Route path='/chat/:id' element={<ChatPage />}/>
+        <Route path='/video-chat/:id' element={ <VideoPage /> } />
       </Route>
     )
   )

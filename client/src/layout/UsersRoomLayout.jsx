@@ -52,9 +52,9 @@ export default function UsersRoomLayout() {
 
   return (
     <div className="bg-white grid  grid-rows-chat-devider border-r-2 relative">
-      <div className="bg-white  p-4 border-b-2 flex justify-between place-items-center">
-        <h1 className="text-2xl font-bold">Users</h1>
-        <FaVideo fontSize={30} className="cursor-pointer"/>
+      <div className="bg-white  p-4 border-b-2 flex justify-between place-items-center ">
+        <h1 className="text-2xl font-bold text-center mx-7 sm:mx-0">Users</h1>
+        <FaVideo fontSize={30} className="cursor-pointer" onClick={()=>navigate(`/video-chat/${id}`)}/>
       </div>
       <div className="p-2 overflow-y-auto remove_scroll_bar ">
         {user.map((user) => (
